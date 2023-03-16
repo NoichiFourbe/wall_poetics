@@ -70,13 +70,13 @@ class tuto_accueilState extends State<tuto_accueil> {
         PageViewModel(
           title: "Découvrez le Street Art grâce à Wall Poetics !",
           body:
-          "Optimisez vos trajets pour profiter des plus belles oeuvres de Paris",
+          "Profitez des plus belles oeuvres de Paris",
           image: _buildImage('assets/images/premiere_image.jpg'),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Une carte mise à jour hebdomadairement",
-          body: "Identifiez les stands qui vous intéressent et laissez-nous vous y guider",
+          body: "Identifiez les street art qui vous intéressent et laissez-nous vous y guider",
           image: _buildFullscreenImage(),
           decoration: pageDecoration.copyWith(
             contentMargin: const EdgeInsets.symmetric(horizontal: 16),
@@ -88,7 +88,7 @@ class tuto_accueilState extends State<tuto_accueil> {
         ),
         PageViewModel(
           title: "La perle rare",
-          body: "Découvrez des articles rares que vous recherchez depuis des lustres",
+          body: "Découvrez cet art urbain en plein expansion",
           image: _buildImage('assets/images/img3.jpg'),
           decoration: pageDecoration.copyWith(
             bodyFlex: 6,
