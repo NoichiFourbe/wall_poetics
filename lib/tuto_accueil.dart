@@ -68,10 +68,10 @@ class tuto_accueilState extends State<tuto_accueil> {
       ),
       pages: [
         PageViewModel(
-          title: "Un outil de recherche communautaire",
+          title: "Découvrez le Street Art grâce à Wall Poetics !",
           body:
-          "Optimisez vos recherches et vos ventes lors de braderies",
-          image: _buildImage('assets/images/img1.jpg'),
+          "Optimisez vos trajets pour profiter des plus belles oeuvres de Paris",
+          image: _buildImage('assets/images/premiere_image.jpg'),
           decoration: pageDecoration,
         ),
         PageViewModel(

@@ -1,6 +1,6 @@
 # braderie_ppe
 
-Projet Braderie Flutter 2023 - Appli mobile pour braderies en France (départ Lille)
+Projet Wall Poetics Flutter 2023 - Appli mobile pour Street Art en France (départ Paris)
 
 ## Getting Started
 
