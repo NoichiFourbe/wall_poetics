@@ -41,6 +41,7 @@ dependencies:
   image_picker: ^0.8.4+4
   firebase_storage: ^11.0.15
   url_launcher: ^6.1.10
+  geolocator: ^9.0.2
 
 
   # The following adds the Cupertino Icons font to your application.

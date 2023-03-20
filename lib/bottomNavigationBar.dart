@@ -7,6 +7,7 @@ import'profil.dart';
 import 'search.dart';
 import'profileWidget.dart';
 import 'new_stand.dart';
+import 'osmhome.dart';
 import 'accueil.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'popupMap.dart';
@@ -48,7 +49,8 @@ class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
     Widget page;
-    Widget acceuil=accueil();
+    //Widget acceuil=accueil();
+    Widget acceuil=Home();
     //Widget home=Home(); //marker placer
     Widget home=searchStand();
     Widget Bdd=popupMap();

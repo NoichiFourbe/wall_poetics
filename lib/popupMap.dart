@@ -128,7 +128,7 @@ class Popup extends StatelessWidget {
                   ),
                   DropdownMenuItem<String>(
                     value: 'inappropriate',
-                    child: Text('Photo inapropriée'),
+                    child: Text('Photo inappropriée'),
                   ),
                   DropdownMenuItem<String>(
                     value: 'other',

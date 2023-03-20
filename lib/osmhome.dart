@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:open_street_map_search_and_pick/open_street_map_search_and_pick.dart';
+import 'package:geolocator/geolocator.dart';
 import 'bottomNavigationBar.dart';
 
 
@@ -14,6 +15,20 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   String locationaddress='Pick Location';
+  late Position _currentPosition = Position(latitude: 48.858370, longitude: 2.294481, timestamp: null, accuracy: 0.0, altitude: 0.0, heading: 0.0, speed: 0.0, speedAccuracy: 0.0);
+
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentLocation();
+  }
+
+  Future<void> _getCurrentLocation() async {
+    final position = await Geolocator.getCurrentPosition();
+    setState(() {
+      _currentPosition = position;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +40,9 @@ class _HomeState extends State<Home> {
           children: [
             SafeArea(
               child: Container(
-                child: InkWell(
+                child: ElevatedButton(
                     child: Text(locationaddress),
-                    onTap: (){
+                    onPressed: (){
                       _showModal(context);
                     }),
               ),
@@ -44,9 +59,9 @@ class _HomeState extends State<Home> {
           children: [
             SafeArea(
               child: Container(
-                child: InkWell(
+                child: ElevatedButton(
                     child: Text(locationaddress),
-                    onTap: (){
+                    onPressed: (){
                       _showModal2(context);
                     }),
               ),
@@ -68,7 +83,8 @@ class _HomeState extends State<Home> {
             //color: Colors.red,
             child: Center(
               child: OpenStreetMapSearchAndPick(
-                  center: LatLong(50.6371, 3.0530),
+                  //center: LatLong(50.6371, 3.0530),
+                  center: LatLong(_currentPosition.latitude, _currentPosition.longitude),
                   buttonColor: Colors.blue,
                   buttonText: 'Set Current Location',
                   onPicked: (pickedData) {
