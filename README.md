@@ -1,6 +1,6 @@
 # braderie_ppe
 
-Projet Wall Poetics Flutter 2023 - Appli mobile pour Street Art en France (départ Paris)
+Projet Wall Poetics Flutter 2023 - Appli mobile pour les passionés de Street Art en France (départ Paris)
 
 ## Getting Started
 
