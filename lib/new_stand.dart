@@ -61,8 +61,8 @@ class _formulaireStandState extends State<formulaireStand> {
       String keywords = _selectedKeyword ?? '';
       List<String> keywordsList = _selectedKeywords;
 
-      print('Description: $description');
-      print('Keywords: ${keywordsList.join(', ')}');
+     // print('Description: $description');
+     // print('Keywords: ${keywordsList.join(', ')}');
     }
   }
 
@@ -78,7 +78,7 @@ class _formulaireStandState extends State<formulaireStand> {
       imageUrl = await reference.getDownloadURL();
 
       setState(() {
-        print("picture uploaded");
+       // print("picture uploaded");
       });
     }
   }
@@ -210,7 +210,7 @@ class _formulaireStandState extends State<formulaireStand> {
                       },
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(Colors.red),),
-                      child: Text('Annuler'),
+                      child: const Text('Annuler'),
                     ),
                   ),
                   Flexible(
@@ -242,7 +242,7 @@ class _formulaireStandState extends State<formulaireStand> {
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(Colors.amber),
                       ),
-                      child: Text('Sauvegarder'),
+                      child: const Text('Sauvegarder'),
                     ),
                   ),
                   Flexible(
@@ -258,7 +258,7 @@ class _formulaireStandState extends State<formulaireStand> {
                         }
                       },
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Color(0xFFE19F0C)),
+                        backgroundColor: MaterialStateProperty.all(const Color(0xFFE19F0C)),
                       ),//
 
                       child: Text('Sauvegarder et placer'),

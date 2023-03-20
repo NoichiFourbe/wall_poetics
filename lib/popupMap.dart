@@ -59,7 +59,7 @@ class _popupMapState extends State<popupMap> {
           child: Icon(
             Icons.location_pin,
             size: 60,
-            color: me[index]==true?Color(0xFF885F06):Color(0xFFE19F0C),
+            color: me[index]==true?const Color(0xFF885F06):const Color(0xFFE19F0C),
           ),
         ),
       )))
@@ -96,13 +96,105 @@ class _popupMapState extends State<popupMap> {
 class Popup extends StatelessWidget {
   final DocumentSnapshot document;
   FirebaseStorage storage = FirebaseStorage.instance;
-  Popup({super.key, required this.document});
+  Popup({Key? key, required this.document});
+
+  void _onReportPressed(BuildContext context) {
+    _showReportDialog(context);
+  }
+
+  void _showReportDialog(BuildContext context) async {
+    String? subject;
+    String? description;
+
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Report'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              DropdownButtonFormField<String>(
+                decoration: const InputDecoration(
+                  labelText: 'Sujet',
+                ),
+                onChanged: (String? value) {
+                  subject = value;
+                },
+                items: const [
+                  DropdownMenuItem<String>(
+                    value: 'spam',
+                    child: Text('Ce spot n\'existe pas/plus'),
+                  ),
+                  DropdownMenuItem<String>(
+                    value: 'inappropriate',
+                    child: Text('Photo inapropriée'),
+                  ),
+                  DropdownMenuItem<String>(
+                    value: 'other',
+                    child: Text('Autre'),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Description',
+                ),
+                onChanged: (String value) {
+                  description = value;
+                },
+                maxLines: 5,
+                validator: (String? value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Décrivez le problème rencontré avec le spot';
+                  }
+                  return null;
+                },
+              ),
+            ],
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Annuler'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                // TODO: Handle report submission
+                FirebaseFirestore.instance
+                    .collection('signalement')
+                    .add({
+                  "userid": FirebaseAuth.instance.currentUser?.uid.toString(),
+                  "sujet" : subject,
+                  "description" : description,
+                  "standSignale" : document.id
+                });
+
+                Navigator.of(context).pop();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Signalement envoyé')),
+                );
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(const Color(
+                    0xFFB71118)),
+              ),
+              child: const Text('Soumettre'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     List<dynamic> pictures = document["pictures"];
     return Container(
-      height: 200,
+      height: 250,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -120,7 +212,7 @@ class Popup extends StatelessWidget {
                   future: storage.ref().child(doc).getDownloadURL(),
                   builder: (context, AsyncSnapshot<dynamic> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     }
                     if (kDebugMode) {
                       print(snapshot.data.toString());
@@ -133,6 +225,20 @@ class Popup extends StatelessWidget {
                   },
                 );
               },
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () => _onReportPressed(context),
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(const Color(0xFFE19F0C)),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                Icon(Icons.flag_outlined),
+                SizedBox(width: 8),
+                Text('Signaler ce stand'),
+              ],
             ),
           ),
         ],
