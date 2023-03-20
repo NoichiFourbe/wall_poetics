@@ -164,7 +164,7 @@ class _formulaireStandState extends State<formulaireStand> {
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Color(0xFFE19F0C)),
-                ),//
+                ),
                 child: Text('Ajouter des photos'),
               ),
               TextFormField(
