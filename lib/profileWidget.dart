@@ -22,7 +22,7 @@ class ProfileWidget extends StatelessWidget {
           boutonProfil(context, 'Mon Profil'),
           boutonStatistiques(context, 'Statistiques'),
           boutonProfil(context, 'Paramètres'),
-          boutonStands(context, 'Mes stands'),
+          boutonStands(context, 'Mes spots'),
           boutonLogout(context, 'Se déconnecter'),
         ],
       ),

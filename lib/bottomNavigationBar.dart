@@ -49,8 +49,8 @@ class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
     Widget page;
-    //Widget acceuil=accueil();
-    Widget acceuil=Home();
+    Widget acceuil=accueil();
+    //Widget acceuil=Home();
     //Widget home=Home(); //marker placer
     Widget home=searchStand();
     Widget Bdd=popupMap();
