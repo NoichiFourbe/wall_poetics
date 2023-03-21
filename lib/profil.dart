@@ -11,6 +11,107 @@ class Profil extends StatefulWidget {
 class _ProfilState extends State<Profil> {
   bool _isLoggedIn = false;
 
+
+  void _showEditForm(BuildContext context, String id) async {
+    String? description;
+    final List<String> _keywords = [
+      'Artiste Indépendant',
+      'Space Invader',
+      'Graffiti',
+      'Pastel',
+      'Pochoir',
+      'Fresque'
+    ];
+    List<String> _selectedKeywords = [];
+
+    // retrieve the document from Firebase
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection('spot').doc(id).get();
+    Map<String, dynamic>? data = snapshot.data() as Map<String, dynamic>?;
+    String defaultDescription = data?['description'] ?? 'Default Description';
+    _selectedKeywords=List<String>.from(data?['mot-cles']);
+
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Modifier un stand'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              InputDecorator(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Mots-clés',
+                ),
+                child: Wrap(
+                  spacing: 8.0,
+                  runSpacing: 4.0,
+                  children: _keywords.map((String keyword) {
+                    return ChoiceChip(
+                      label: Text(keyword),
+                      selected: _selectedKeywords.contains(keyword),
+                      onSelected: (bool selected) {
+                        setState(() {
+                          if (selected) {
+                            _selectedKeywords.add(keyword);
+                          } else {
+                            _selectedKeywords.remove(keyword);
+                          }
+                        });
+                      },
+                    );
+                  }).toList(),
+                ),
+              ), // MAKE THE SELECTED ITEMS SELECTED
+              const SizedBox(height: 16),
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Description',
+                ),
+                initialValue: defaultDescription,
+                onChanged: (String value) {
+                  description = value;
+                },
+                maxLines: 5,
+                validator: (String? value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Insérez une nouvelle description';
+                  }
+                  return null;
+                },
+              ),
+            ],
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Annuler'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                //edit the stand
+                FirebaseFirestore.instance.collection('spot').doc(id).update(
+                    {'description': description, 'mot-cles' : _selectedKeywords});
+                Navigator.of(context).pop();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('spot modifié')),
+                );
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(const Color(
+                    0xFFB71118)),
+              ),
+              child: const Text('Sauvegarder les modifications'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+
   @override
   void initState() {
     super.initState();
@@ -26,7 +127,6 @@ class _ProfilState extends State<Profil> {
   @override
   Widget build(BuildContext context) {
     var currentUser = FirebaseAuth.instance.currentUser;
-    print(currentUser?.uid);
     String text = currentUser?.email ?? 'User is currently signed out!';
 
     return Scaffold(
@@ -54,6 +154,7 @@ class _ProfilState extends State<Profil> {
                           width: MediaQuery.of(context).size.width*3/4,
                           child: ListView(
                             children: snapshot.data!.docs.map((snap){
+                              String id = snap.id;
                               return Card(
                                 child: ListTile(
                                   title: Text(snap['description'].toString()),
@@ -66,7 +167,8 @@ class _ProfilState extends State<Profil> {
                                           icon: const Icon(Icons.edit_outlined),
                                           onPressed: () {
                                             // Define the edit function here
-                                            // e.g. Navigator.pushNamed(context, '/edit', arguments: snap.id);
+                                            _showEditForm(context,id);
+                                            // find a way to pass id
                                           },
                                         ),
                                         IconButton(
@@ -77,16 +179,16 @@ class _ProfilState extends State<Profil> {
                                               builder: (BuildContext context) {
                                                 return AlertDialog(
                                                   title: const Text("Confirmation"),
-                                                  content: const Text("Souhaitez-vous vraiment supprimer ce stand? Il ne sera plus récupérable"),
+                                                  content: const Text("Are you sure you want to delete this item?"),
                                                   actions: <Widget>[
                                                     TextButton(
-                                                      child: const Text("Annuler"),
+                                                      child: const Text("Cancel"),
                                                       onPressed: () {
                                                         Navigator.of(context).pop();
                                                       },
                                                     ),
                                                     TextButton(
-                                                      child: const Text("Supprimer le stand"),
+                                                      child: const Text("Delete"),
                                                       onPressed: () {
                                                         FirebaseFirestore.instance.collection('spot').doc(snap.id).delete();
                                                         // Define the delete function here
@@ -105,6 +207,7 @@ class _ProfilState extends State<Profil> {
                                   ),
                                 ),
                               );
+
 
                             }).toList(),
                           ),
@@ -132,3 +235,5 @@ class _ProfilState extends State<Profil> {
     );
   }
 }
+
+
