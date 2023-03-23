@@ -90,9 +90,9 @@ class _NavBarState extends State<NavBar> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),//tooltip pour changer le label en haut
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Rechercher un objet'),
-          BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Map'), //changer en map
-          BottomNavigationBarItem(icon: Icon(Icons.archive), label: 'Créer un stand'), // intégrer placer un stand a info vendeur
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Rechercher par thème'),
+          BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Carte'), //changer en map
+          BottomNavigationBarItem(icon: Icon(Icons.archive), label: 'Créer un spot'), // intégrer placer un stand a info vendeur
           BottomNavigationBarItem(icon: Icon(Icons.manage_accounts), label: 'Profil'),
           //BottomNavigationBarItem(icon: Icon(Icons.login_rounded), label: 'Connexion'),
 

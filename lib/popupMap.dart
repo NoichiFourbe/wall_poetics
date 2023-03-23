@@ -1,7 +1,10 @@
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:path/path.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
@@ -205,10 +208,53 @@ class _popupMapState extends State<popupMap> {
   }
 }
 
-class Popup extends StatelessWidget {
+class Popup extends StatefulWidget {
   final DocumentSnapshot document;
-  FirebaseStorage storage = FirebaseStorage.instance;
+
   Popup({Key? key, required this.document});
+
+  @override
+  State<Popup> createState() => _PopupState();
+}
+
+class _PopupState extends State<Popup> {
+  List<String> _pictures = [];
+  String imageUrl="";
+  FirebaseStorage storage = FirebaseStorage.instance;
+
+  List<File> _images = [];
+
+  Future uploadPic(BuildContext context) async{
+    for(File _image in _images) {
+      String fileName = basename(_image.path);
+
+      String res = FirebaseAuth.instance.currentUser!.uid.toString() + "/" + fileName;
+      _pictures.add(res);
+      Reference reference = storage.ref().child(res);
+      UploadTask uploadTask = reference.putFile(_image);
+      TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() => null);
+      imageUrl = await reference.getDownloadURL();
+
+      setState(() {
+         print("picture uploaded");
+      });
+    }
+  }
+
+  Future<void> _pickImage(ImageSource source) async {
+    final pickedImages = await ImagePicker().pickMultiImage();
+    if (pickedImages != null) {
+      setState(() {
+        _images.addAll(pickedImages.map((pickedImage) => File(pickedImage.path)).toList());
+      });
+    }
+  }
+
+  void _removeImage(int index) {
+    setState(() {
+      _images.removeAt(index);
+    });
+  }
 
   void _onReportPressed(BuildContext context) {
     _showReportDialog(context);
@@ -281,7 +327,7 @@ class Popup extends StatelessWidget {
                   "userid": FirebaseAuth.instance.currentUser?.uid.toString(),
                   "sujet" : subject,
                   "description" : description,
-                  "standSignale" : document.id
+                  "standSignale" : widget.document.id
                 });
 
                 Navigator.of(context).pop();
@@ -303,7 +349,7 @@ class Popup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<dynamic> pictures = document["pictures"];
+    List<dynamic> pictures = widget.document["pictures"];
     bool _isLoggedIn=false;
     final User? user = FirebaseAuth.instance.currentUser;
     _isLoggedIn= user ==null ? false : true;
@@ -312,8 +358,8 @@ class Popup extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(document['description'].toString()),
-          Text(document['mot-cles'].toString()),
+          Text(widget.document['description'].toString()),
+          Text(widget.document['mot-cles'].toString()),
           SizedBox(
             height: 100,
             child: ListView.builder(
@@ -344,7 +390,34 @@ class Popup extends StatelessWidget {
             visible: _isLoggedIn,
             child:  ElevatedButton(
               onPressed: () {
-                // action à exécuter lors du clic sur le bouton
+                showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return SafeArea(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        ListTile(
+                          leading: const Icon(Icons.camera_alt),
+                          title: const Text('Prendre une photo'),
+                          onTap: () {
+                            Navigator.pop(context);
+                            _pickImage(ImageSource.camera);
+                          },
+                        ),
+                        ListTile(
+                          leading: const Icon(Icons.image),
+                          title: const Text('Choisir une image depuis la galerie'),
+                          onTap: () {
+                            Navigator.pop(context);
+                            _pickImage(ImageSource.gallery);
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                }
+                 );
               },
               child: Row(
                 mainAxisSize: MainAxisSize.min,

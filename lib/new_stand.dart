@@ -17,7 +17,6 @@ class formulaireStand extends StatefulWidget {
 }
 
 class _formulaireStandState extends State<formulaireStand> {
-  late Position _currentPosition = Position(latitude: 48.858370, longitude: 2.294481, timestamp: null, accuracy: 0.0, altitude: 0.0, heading: 0.0, speed: 0.0, speedAccuracy: 0.0);
 
   final _formKey = GlobalKey<FormState>();
   String locationaddress='Placer le spot';
@@ -30,15 +29,19 @@ class _formulaireStandState extends State<formulaireStand> {
     'Fresque'
   ];
   List<String> _selectedKeywords = [];
-  List<String> _pictures = [];
   String? _selectedKeyword;
+  List<String> _pictures = [];
+  String imageUrl="";
+  FirebaseStorage storage = FirebaseStorage.instance;
+
   List<File> _images = [];
   double zero= 0.1;
   double pickedLongitude=0.1;
   double pickedLatitude=0.1;
-  String imageUrl="";
+
   String _description="";
-  FirebaseStorage storage = FirebaseStorage.instance;
+  late Position _currentPosition = Position(latitude: 48.858370, longitude: 2.294481, timestamp: null, accuracy: 0.0, altitude: 0.0, heading: 0.0, speed: 0.0, speedAccuracy: 0.0);
+
 
   Future<void> _pickImage(ImageSource source) async {
     final pickedImages = await ImagePicker().pickMultiImage();
@@ -61,8 +64,6 @@ class _formulaireStandState extends State<formulaireStand> {
       String keywords = _selectedKeyword ?? '';
       List<String> keywordsList = _selectedKeywords;
 
-     // print('Description: $description');
-     // print('Keywords: ${keywordsList.join(', ')}');
     }
   }
 
