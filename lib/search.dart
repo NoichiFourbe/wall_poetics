@@ -16,17 +16,12 @@ class searchStand extends StatefulWidget {
 class _searchStandState extends State<searchStand> {
   final _formKey = GlobalKey<FormState>();
   final List<String> _keywords = [
-    'Vêtements',
-    'Vêtements pour enfants',
-    'Musique',
-    'Antiquités',
-    'Cinéma',
-    'Livres',
-    'Manga',
-    'Objets de collection',
-    'Jeux',
-    'Jouets',
-    'Jeux vidéos'
+    'Artiste Indépendant',
+    'Space Invader',
+    'Graffiti',
+    'Pastel',
+    'Pochoir',
+    'Fresque'
   ];
   List<String> _selectedKeywords = [];
   String? _selectedKeyword;
@@ -151,7 +146,7 @@ class _searchStandState extends State<searchStand> {
                                   children: [
                                     StreamBuilder(
                                       stream: FirebaseFirestore.instance
-                                          .collection('stand')
+                                          .collection('spot')
                                           .where('mot-cles',arrayContainsAny:_selectedKeywords )
                                           .snapshots(),
                                       builder: (BuildContext context,
@@ -177,9 +172,7 @@ class _searchStandState extends State<searchStand> {
                                                     .map((snap) {
                                                   return Card(
                                                       child: ListTile(
-                                                        title: Text(
-                                                            snap['address'].toString()),
-                                                        subtitle: Text(snap['description']
+                                                        title: Text(snap['description']
                                                             .toString()+" "+snap['mot-cles']
                                                             .toString()
                                                         ),

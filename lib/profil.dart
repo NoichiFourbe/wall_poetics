@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+
 
 class Profil extends StatefulWidget {
   const Profil({Key? key}) : super(key: key);
@@ -10,6 +12,9 @@ class Profil extends StatefulWidget {
 
 class _ProfilState extends State<Profil> {
   bool _isLoggedIn = false;
+  late DocumentSnapshot document;
+  FirebaseStorage storage = FirebaseStorage.instance;
+
 
 
   void _showEditForm(BuildContext context, String id) async {
@@ -62,7 +67,7 @@ class _ProfilState extends State<Profil> {
                     );
                   }).toList(),
                 ),
-              ), // MAKE THE SELECTED ITEMS SELECTED
+              ),
               const SizedBox(height: 16),
               TextFormField(
                 decoration: const InputDecoration(

@@ -304,6 +304,9 @@ class Popup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<dynamic> pictures = document["pictures"];
+    bool _isLoggedIn=false;
+    final User? user = FirebaseAuth.instance.currentUser;
+    _isLoggedIn= user ==null ? false : true;
     return Container(
       height: 250,
       child: Column(
@@ -337,6 +340,23 @@ class Popup extends StatelessWidget {
               },
             ),
           ),
+          Visibility(
+            visible: _isLoggedIn,
+            child:  ElevatedButton(
+              onPressed: () {
+                // action à exécuter lors du clic sur le bouton
+              },
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: const [
+                  Icon(Icons.add),
+                  SizedBox(width: 8),
+                  Text('Ajouter des photos au spot'),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 16.0),
           ElevatedButton(
             onPressed: () => _onReportPressed(context),
             style: ButtonStyle(
