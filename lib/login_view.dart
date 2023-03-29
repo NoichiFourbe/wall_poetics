@@ -31,7 +31,7 @@ class _LoginViewState extends State<LoginView> {
       appBar: AppBar(
         title: const Text('Login'),
         centerTitle: true,
-        backgroundColor: Color(0xFFE19F0C),
+        backgroundColor: Color(0xFF2487DC),
       ),
       body: Center(
         child: Column(
@@ -112,7 +112,7 @@ class _SubmitButtonState extends State<_SubmitButton> {
         }
       },
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(Color(0xFFE19F0C)),
+          backgroundColor: MaterialStateProperty.all(Color(0xFF63AEEE)),
         ),
       child: const Text('Login'),
     );
@@ -128,7 +128,7 @@ class _CreateAccountButton extends StatelessWidget {
     return TextButton(
       style: ButtonStyle(foregroundColor: MaterialStateProperty.resolveWith<Color?>(
     (Set<MaterialState> states) {
-        return Colors.amber;
+        return Color(0xFF63AEEE);
       } )),
       onPressed: () {
         Navigator.of(context).push(

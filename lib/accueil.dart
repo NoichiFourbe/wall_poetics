@@ -21,16 +21,25 @@ class _accueilState extends State<accueil> {
               ),
             ),
           ),
-          Center(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                'Bienvenue sur notre application de Street Art',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.amber,
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.45,
+            left: 20,
+            right: 20,
+            bottom: MediaQuery.of(context).size.height * 0.3,
+            child: Opacity(
+              opacity: 0.6,
+              child: Container(
+                color: Colors.white,
+                child: Center(
+                  child: Text(
+                    'Bienvenue sur notre application de Street Art',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF2487DC),
+                    ),
+                  ),
                 ),
               ),
             ),

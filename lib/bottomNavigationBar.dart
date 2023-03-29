@@ -98,8 +98,8 @@ class _NavBarState extends State<NavBar> {
 
         ],
         currentIndex: selectedIndex,
-        selectedItemColor: Colors.amber,
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: Color(0xFF63AEEE),
+        unselectedItemColor: Color(0xFF2487DC),
 
         onTap: _onItemTapped,
       ),

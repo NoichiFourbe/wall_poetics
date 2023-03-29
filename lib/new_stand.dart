@@ -164,7 +164,7 @@ class _formulaireStandState extends State<formulaireStand> {
                   );
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Color(0xFFE19F0C)),
+                  backgroundColor: MaterialStateProperty.all(Color(0xFF63AEEE)),
                 ),
                 child: Text('Ajouter des photos'),
               ),
@@ -277,7 +277,7 @@ class _formulaireStandState extends State<formulaireStand> {
                       }
                         },
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.amber),
+                        backgroundColor: MaterialStateProperty.all(Color(0xFF2487DC)),
                       ),
                       child: const Text('Sauvegarder'),
                     ),

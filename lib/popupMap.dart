@@ -74,7 +74,8 @@ class _popupMapState extends State<popupMap> {
           child: Icon(
             Icons.location_pin,
             size: 60,
-            color: me[index]==true?const Color(0xFF885F06):const Color(0xFFE19F0C),
+            color: me[index]==true?const Color(0xFF63AEEE):const Color(
+                0xFF807E7A),
           ),
         ),
       )))
@@ -110,7 +111,8 @@ class _popupMapState extends State<popupMap> {
           child: Icon(
             Icons.location_pin,
             size: 60,
-            color: me[index] == true ? const Color(0xFF885F06) : const Color(0xFFE19F0C),
+            color: me[index] == true ? const Color(0xFF63AEEE) : const Color(
+                0xFF807E7A),
           ),
         ),
       )))
@@ -176,7 +178,7 @@ class _popupMapState extends State<popupMap> {
                   },
                   child: Text('Rechercher'),
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Color(0xFFE19F0C)),
+                    backgroundColor: MaterialStateProperty.all(Color(0xFF2487DC)),
                   ),
                 ),
               ],
@@ -433,7 +435,7 @@ class _PopupState extends State<Popup> {
           ElevatedButton(
             onPressed: () => _onReportPressed(context),
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(const Color(0xFFE19F0C)),
+              backgroundColor: MaterialStateProperty.all(const Color(0xFFE16C0C)),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,

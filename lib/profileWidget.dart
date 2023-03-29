@@ -38,7 +38,7 @@ class ProfileWidget extends StatelessWidget {
           onPressed: () {},
           child: Text(title),
           style: ElevatedButton.styleFrom(
-            foregroundColor: Colors.white, backgroundColor: Color(0xFFE19F0C),
+            foregroundColor: Colors.white, backgroundColor: Color(0xFF63AEEE),
           ),
         ),
       ),
@@ -54,7 +54,7 @@ class ProfileWidget extends StatelessWidget {
           onPressed: () {},
           child: Text(title),
           style: ElevatedButton.styleFrom(
-            foregroundColor: Colors.white, backgroundColor: Color(0xFFE19F0C),
+            foregroundColor: Colors.white, backgroundColor: Color(0xFF63AEEE),
           ),
         ),
       ),
@@ -70,7 +70,7 @@ class ProfileWidget extends StatelessWidget {
           onPressed: () {},
           child: Text(title),
           style: ElevatedButton.styleFrom(
-            foregroundColor: Colors.white, backgroundColor: Color(0xFFE19F0C),
+            foregroundColor: Colors.white, backgroundColor: Color(0xFF63AEEE),
           ),
         ),
       ),
@@ -89,7 +89,7 @@ class ProfileWidget extends StatelessWidget {
           );},
           child: Text(title),
           style: ElevatedButton.styleFrom(
-            foregroundColor: Colors.white, backgroundColor: Color(0xFFE19F0C),
+            foregroundColor: Colors.white, backgroundColor: Color(0xFF63AEEE),
           ),
         ),
       ),
@@ -107,7 +107,7 @@ class ProfileWidget extends StatelessWidget {
             },
           child: Text(title),
           style: ElevatedButton.styleFrom(
-            foregroundColor: Colors.white, backgroundColor: Color(0xFFE19F0C),
+            foregroundColor: Colors.white, backgroundColor: Color(0xFF63AEEE),
           ),
         ),
       ),

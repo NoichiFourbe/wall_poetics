@@ -61,21 +61,21 @@ class tuto_accueilState extends State<tuto_accueil> {
 
           ),
           style: ElevatedButton.styleFrom(
-            backgroundColor: Color(0xFF885F06)
+            backgroundColor: const Color(0xFF2487DC)
           ),
           onPressed: () => _onIntroEnd(context),
         ),
       ),
       pages: [
         PageViewModel(
-          title: "Découvrez le Street Art grâce à Wall Poetics !",
+          title: "(Re)Découvrez le Street Art grâce à Wall Poetics !",
           body:
           "Profitez des plus belles oeuvres de Paris",
           image: _buildImage('assets/images/premiere_image.jpg'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Une carte mise à jour hebdomadairement",
+          title: "Une carte mise à jour régulièrement",
           body: "Identifiez les street art qui vous intéressent et laissez-nous vous y guider",
           image: _buildFullscreenImage(),
           decoration: pageDecoration.copyWith(
@@ -116,26 +116,26 @@ class tuto_accueilState extends State<tuto_accueil> {
           : const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
       dotsDecorator: const DotsDecorator(
         size: Size(10.0, 10.0),
-        color: Color(0xFF885F06),
-        activeColor: Color(0xFFE19F0C),
+        color: Color(0xFF2487DC),
+        activeColor: Color(0xFF63AEEE),
         activeSize: Size(22.0, 10.0),
         activeShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(25.0)),
         ),
       ),
       dotsContainerDecorator: const ShapeDecoration(
-        color: Colors.amber,
+        color:  Color(0xFF8FC8FC),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
         ),
       ),
       baseBtnStyle: TextButton.styleFrom(
-        backgroundColor: Colors.amber,
+        backgroundColor: Color(0xFF8FC8FC),
       ),
-      skipStyle: TextButton.styleFrom(foregroundColor: Color(0xFF885F06)),
-      doneStyle: TextButton.styleFrom(foregroundColor: Color(0xFF885F06)),
-      nextStyle: TextButton.styleFrom(foregroundColor: Color(0xFF885F06)),
-      backStyle: TextButton.styleFrom(foregroundColor: Color(0xFF885F06)),
+      skipStyle: TextButton.styleFrom(foregroundColor: Color(0xFF004E91)),
+      doneStyle: TextButton.styleFrom(foregroundColor: Color(0xFF004E91)),
+      nextStyle: TextButton.styleFrom(foregroundColor: Color(0xFF004E91)),
+      backStyle: TextButton.styleFrom(foregroundColor: Color(0xFF004E91)),
     );
   }
 }
